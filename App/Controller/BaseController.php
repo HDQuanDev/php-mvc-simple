@@ -3,7 +3,7 @@ class BaseController
 {
     protected function render($view, $data = [])
     {
-        extract($data);
+        extract($data); //Chuyển các phần tử của mảng thành các biến độc lập với giá trị là giá trị của phần tử đó trong mảng
         require_once __DIR__ . '/../View/' . $view . '.php';
     }
 
@@ -12,8 +12,9 @@ class BaseController
         header('Location: ' . $url);
         exit;
     }
-    public function default()
+    public function index()
     {
-        echo "Base Controller";
+        $this->render('Home');
+        return;
     }
 }

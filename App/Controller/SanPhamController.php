@@ -4,7 +4,7 @@ require_once __DIR__ . '/BaseController.php';
 require_once __DIR__ . '/../Model/NhaSX.php';
 class SanPhamController extends BaseController
 {
-    public function index($id)
+    public function index($id = null)
     {
         $getSP = new SanPham();
         $data = $getSP->getSanPhamById($id);
@@ -17,19 +17,33 @@ class SanPhamController extends BaseController
     {
         $xoaSP = new SanPham();
         if ($xoaSP->xoaSanPham($id)) {
-            echo "Xóa sản phẩm thành công";
-            $this->redirect('index.php?controller=DSSP&action=index');
+            $result = [
+                'title' => 'Xóa sản phẩm thành công',
+                'message' => 'Xóa sản phẩm thành công',
+                'redirect' => '/index.php?controller=DSSP'
+            ];
+            $this->render('Result', ['data' => $result]);
+            return;
         } else {
-            echo "Xóa sản phẩm thất bại";
-            echo $xoaSP->db->error;
-            echo "<a href='index.php?controller=DSSP&action=index'>Quay lại</a>";
+            $result = [
+                'title' => 'Lỗi xóa sản phẩm',
+                'error' => $xoaSP->db->error,
+                'message' => 'Xóa sản phẩm thất bại, vui lòng kiểm tra lại',
+                'redirect' => '/index.php?controller=DSSP'
+            ];
+            $this->render('Result', ['data' => $result]);
+            return;
         }
     }
     public function suaSanPham($id)
     {
         if (empty($_POST['tensp']) || empty($_POST['manhasx']) || empty($_POST['dongia']) || empty($_POST['soluong'])) {
-            echo "Vui lòng nhập đầy đủ thông tin";
-            echo "<a href='index.php?controller=SuaSP&action=index&id=$id'>Quay lại</a>";
+            $result = [
+                'title' => 'Lỗi sửa sản phẩm',
+                'message' => 'Vui lòng nhập đầy đủ thông tin',
+                'redirect' => '/index.php?controller=SuaSP&id=' . $id
+            ];
+            $this->render('Result', ['data' => $result]);
             return;
         }
         $tensp = $_POST['tensp'];
@@ -38,12 +52,22 @@ class SanPhamController extends BaseController
         $soluong = $_POST['soluong'];
         $suaSP = new SanPham();
         if ($suaSP->suaSanPham($id, $tensp, $manhasx, $dongia, $soluong)) {
-            echo "Sửa sản phẩm thành công";
-            $this->redirect('index.php?controller=DSSP&action=index');
+            $result = [
+                'title' => 'Sửa sản phẩm thành công',
+                'message' => 'Sửa sản phẩm thành công',
+                'redirect' => '/index.php?controller=DSSP'
+            ];
+            $this->render('Result', ['data' => $result]);
+            return;
         } else {
-            echo "Sửa sản phẩm thất bại";
-            echo $suaSP->db->error;
-            echo "<a href='index.php?controller=SuaSP&action=index&id=$id'>Quay lại</a>";
+            $result = [
+                'title' => 'Lỗi sửa sản phẩm',
+                'error' => $suaSP->db->error,
+                'message' => 'Sửa sản phẩm thất bại, vui lòng kiểm tra lại',
+                'redirect' => '/index.php?controller=DSSP'
+            ];
+            $this->render('Result', ['data' => $result]);
+            return;
         }
     }
 }

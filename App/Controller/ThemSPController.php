@@ -14,8 +14,12 @@ class ThemSPController extends BaseController
     public function themSanPham()
     {
         if (empty($_POST['tensp']) || empty($_POST['manhasx']) || empty($_POST['dongia']) || empty($_POST['soluong'])) {
-            echo "Vui lòng nhập đầy đủ thông tin";
-            echo "<a href='index.php?controller=ThemSP&action=index'>Quay lại</a>";
+            $result = [
+                'title' => 'Lỗi thêm sản phẩm',
+                'message' => 'Vui lòng nhập đầy đủ thông tin',
+                'redirect' => '/index.php?controller=ThemSP'
+            ];
+            $this->render('Result', ['data' => $result]);
             return;
         }
         $tensp = $_POST['tensp'];
@@ -24,12 +28,22 @@ class ThemSPController extends BaseController
         $soluong = $_POST['soluong'];
         $themSP = new SanPham();
         if ($themSP->themSanPham($tensp, $manhasx, $dongia, $soluong)) {
-            echo "Thêm sản phẩm thành công";
-            $this->redirect('index.php?controller=DSSP&action=index');
+            $result = [
+                'title' => 'Thêm sản phẩm thành công',
+                'message' => 'Thêm sản phẩm thành công',
+                'redirect' => '/index.php?controller=DSSP'
+            ];
+            $this->render('Result', ['data' => $result]);
+            return;
         } else {
-            echo "Thêm sản phẩm thất bại";
-            echo $themSP->db->error;
-            echo "<a href='index.php?controller=ThemSP&action=index'>Quay lại</a>";
+            $result = [
+                'title' => 'Lỗi thêm sản phẩm',
+                'error' => $themSP->db->error,
+                'message' => 'Thêm sản phẩm thất bại, vui lòng kiểm tra lại',
+                'redirect' => '/index.php?controller=ThemSP'
+            ];
+            $this->render('Result', ['data' => $result]);
+            return;
         }
     }
     public function redirect($url)

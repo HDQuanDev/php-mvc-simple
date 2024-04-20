@@ -1,9 +1,10 @@
 <?php
 class GetNhaSX extends DB
 {
+    private $table = 'Tbl_nhasx'; // tạo biến table để lưu tên bảng nha san xuat
     public function getNhaSanxuat()
     {
-        $sql = "SELECT * FROM Tbl_nhasx";
+        $sql = "SELECT * FROM " . $this->table;
         $result = $this->db->query($sql);
         $data = [];
         if ($result->num_rows > 0) {
@@ -15,7 +16,7 @@ class GetNhaSX extends DB
     }
     public function getNhaSanxuatById($id)
     {
-        $sql = "SELECT * FROM Tbl_nhasx WHERE ma_nhasx = $id";
+        $sql = "SELECT * FROM " . $this->table . " WHERE ma_nhasx = $id";
         $result = $this->db->query($sql);
         $data = [];
         if ($result->num_rows > 0) {

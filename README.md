@@ -7,7 +7,7 @@
 ## Cài đặt
 
 1. Clone dự án này từ GitHub.
-2. Chạy `composer install` để cài đặt các dependencies.
+2. Up file `project_sp (1).sql` lên cơ sở dữ liệu
 3. Cấu hình kết nối cơ sở dữ liệu trong file `App/Core/DB.php`.
 4. Chạy `php -S localhost:8000` để khởi động server.
 

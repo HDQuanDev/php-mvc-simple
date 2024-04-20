@@ -2,13 +2,14 @@
 require_once __DIR__ . '/../Core/DB.php';
 class SanPham extends DB
 {
+    private $table = 'Tbl_sanpham'; //tạo biến table để lưu tên bảng
     public function themSanPham($tensp, $manhasx, $dongia, $soluong)
     {
         $tensp = $this->db->real_escape_string($tensp);
         $manhasx = $this->db->real_escape_string($manhasx);
         $dongia = $this->db->real_escape_string($dongia);
         $soluong = $this->db->real_escape_string($soluong);
-        $sql = "INSERT INTO Tbl_sanpham (ten_sp, ma_nhasx, dongia, soluong) VALUES ('$tensp', '$manhasx', '$dongia', '$soluong')";
+        $sql = "INSERT INTO " . $this->table . " (ten_sp, ma_nhasx, dongia, soluong) VALUES ('$tensp', '$manhasx', '$dongia', '$soluong')";
         if ($this->db->query($sql) === TRUE) {
             return true;
         } else {
@@ -17,7 +18,7 @@ class SanPham extends DB
     }
     public function getDanhSachSanPham()
     {
-        $sql = "SELECT * FROM Tbl_sanpham";
+        $sql = "SELECT * FROM " . $this->table;
         $result = $this->db->query($sql);
         $data = [];
         if ($result->num_rows > 0) {
@@ -41,7 +42,7 @@ class SanPham extends DB
         $manhasx = $this->db->real_escape_string($manhasx);
         $dongia = $this->db->real_escape_string($dongia);
         $soluong = $this->db->real_escape_string($soluong);
-        $sql = "UPDATE Tbl_sanpham SET ten_sp = '$tensp', ma_nhasx = '$manhasx', dongia = '$dongia', soluong = '$soluong' WHERE ma_sp = $id";
+        $sql = "UPDATE " . $this->table . " SET ten_sp = '$tensp', ma_nhasx = '$manhasx', dongia = '$dongia', soluong = '$soluong' WHERE ma_sp = $id";
         if ($this->db->query($sql) === TRUE) {
             return true;
         } else {
@@ -50,7 +51,7 @@ class SanPham extends DB
     }
     public function XoaSanPham($id)
     {
-        $sql = "DELETE FROM Tbl_sanpham WHERE ma_sp = $id";
+        $sql = "DELETE FROM " . $this->table . " WHERE ma_sp = $id";
         if ($this->db->query($sql) === TRUE) {
             return true;
         } else {
@@ -59,7 +60,7 @@ class SanPham extends DB
     }
     public function getSanPhamById($id)
     {
-        $sql = "SELECT * FROM Tbl_sanpham WHERE ma_sp = $id";
+        $sql = "SELECT * FROM " . $this->table . " WHERE ma_sp = $id";
         $result = $this->db->query($sql);
         $data = [];
         if ($result->num_rows > 0) {

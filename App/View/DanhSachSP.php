@@ -1,46 +1,10 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Danh sách sản phẩm</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        a {
-            color: #333;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: #007BFF;
-        }
-    </style>
-</head>
+<?php
+$title = 'Danh sách sản phẩm';
+include __DIR__ . '/Compoments/main.php';
+?>
 
 <body>
-    <h1>Danh sách sản phẩm</h1>
+    <h1><?php echo $title; ?></h1>
     <table>
         <tr>
             <th>STT</th>
@@ -62,7 +26,7 @@
                 <td><?php echo number_format($sp['dongia']); ?> VND</td>
                 <td><?php echo number_format($sp['soluong'] * $sp['dongia']); ?> VND</td>
                 <td>
-                    <a href="index.php?controller=SanPham&action=index&id=<?php echo $sp['ma_sp']; ?>">Sửa</a>
+                    <a href="index.php?controller=SanPham&id=<?php echo $sp['ma_sp']; ?>">Sửa</a>
                     <a href="index.php?controller=SanPham&action=xoaSanPham&id=<?php echo $sp['ma_sp']; ?>">Xóa</a>
                 </td>
             </tr>
@@ -70,7 +34,8 @@
             $stt++;
         endforeach; ?>
     </table>
-    <a href="index.php?controller=ThemSP&action=index" style="margin-top: 10px; display: block;">Thêm sản phẩm</a>
+    <hr>
+    <a href="index.php?controller=ThemSP" style="margin-top: 10px; display: block;">Thêm sản phẩm</a>
 </body>
 
 </html>

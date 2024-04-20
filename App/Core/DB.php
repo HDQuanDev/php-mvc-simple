@@ -5,7 +5,7 @@ class DB
     protected $servername = "localhost";
     protected $username = "root";
     protected $password = "";
-    protected $dbname = "project_sp";
+    protected $dbname = "testmvc";
     public function __construct()
     {
         $this->db = new mysqli($this->servername, $this->username, $this->password, $this->dbname);

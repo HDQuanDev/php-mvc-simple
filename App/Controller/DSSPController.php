@@ -7,7 +7,7 @@ class DSSPController extends BaseController
     {
         $dssp = new SanPham();
         $data = $dssp->getDanhSachSanPham();
-        $this->render('DanhSachSP', ['dssp' => $data]);
+        $this->render('DanhSachSP', ['dssp' => $data]); //gọi hàm render và truyền vào tên view và dữ liệu
         return;
     }
 }

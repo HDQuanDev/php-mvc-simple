@@ -1,53 +1,10 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Sửa sản phẩm</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-top: 20px;
-        }
-        input, select {
-            margin-top: 5px;
-            padding: 10px;
-            font-size: 16px;
-        }
-        input[type="submit"] {
-            margin-top: 30px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 10px 20px;
-        }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-        a {
-            color: #333;
-            text-decoration: none;
-            margin-top: 20px;
-            display: inline-block;
-        }
-        a:hover {
-            color: #007BFF;
-        }
-    </style>
-</head>
+<?php
+$title = 'Sửa sản phẩm: ' . $sanpham[0]['ten_sp'];
+include __DIR__ . '/Compoments/main.php';
+?>
 
 <body>
-    <h1>Sửa sản phẩm</h1>
-    <h2><?php echo $sanpham[0]['ten_sp']; ?></h2>
+    <h1><?php echo $title; ?></h1>
     <form action="index.php?controller=SanPham&action=suaSanPham&id=<?php echo $sanpham[0]['ma_sp']; ?>" method="post">
         <label for="tensp">Tên sản phẩm:</label>
         <input type="text" id="tensp" name="tensp" value="<?php echo $sanpham[0]['ten_sp']; ?>">
@@ -62,8 +19,8 @@
         <label for="soluong">Số lượng:</label>
         <input type="number" id="soluong" name="soluong" value="<?php echo $sanpham[0]['soluong']; ?>">
         <input type="submit" value="Sửa sản phẩm">
-    </form>
-    <a href="index.php?controller=DSSP&action=index">Danh sách sản phẩm</a>
+    </form><hr>
+    <a href="index.php?controller=DSSP">Danh sách sản phẩm</a>
 </body>
 
 </html>
